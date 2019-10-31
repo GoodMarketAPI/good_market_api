@@ -34,7 +34,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('receiver_district_id')->references('code')->on('districts')->onDelete('cascade');
+            $table->foreign('receiver_district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->foreign('discount_code')->references('code')->on('discount_codes')->onDelete('cascade');
             $table->foreign('voucher_code')->references('code')->on('voucher_codes')->onDelete('cascade');
         });

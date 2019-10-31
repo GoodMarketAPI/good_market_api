@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('fee')->nullable();
             $table->timestamps();
 
-            $table->foreign('supplier_id')->references('code')->on('suppliers')->onDelete('cascade');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
         });
     }
 
