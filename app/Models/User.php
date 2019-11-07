@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 07 Nov 2019 05:10:33 +0000.
+ * Date: Thu, 07 Nov 2019 05:40:35 +0000.
  */
 
 namespace App\Models;
@@ -26,6 +26,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $address
  * @property int $referral_id
  * @property bool $notification
+ * @property string $device_token
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -52,7 +53,9 @@ class User extends Authenticatable
 	protected $hidden = [
 		'password',
         'avatar',
-        'remember_token'
+        'remember_token',
+        'created_at',
+        'updated_at',
 	];
 
 	protected $fillable = [
@@ -65,6 +68,7 @@ class User extends Authenticatable
 		'address',
 		'referral_id',
 		'notification',
+		'device_token',
 		'remember_token'
 	];
 

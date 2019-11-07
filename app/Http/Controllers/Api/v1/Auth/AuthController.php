@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\Auth;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Carbon\Carbon;
@@ -50,10 +51,10 @@ class AuthController extends Controller
     /**
      * Client Login
      */
-    public function login(UserLoginRequest $request)
+    public function login(LoginRequest $request)
     {
         try {
-            $user = User::where('email', $request->email)
+            $user = User::where('phone', $request->phone)
                 ->first();
 
             if (!$user) {
@@ -61,7 +62,7 @@ class AuthController extends Controller
             }
 
             if (!\Hash::check($request->password, $user->password)) {
-                throw new \Exception('Email hoặc mật khẩu không đúng', 200);
+                throw new \Exception('Mật khẩu không đúng', 200);
             }
 
             if($request->device_token){
@@ -134,10 +135,10 @@ class AuthController extends Controller
     public function logout()
     {
         try {
-            $doctor = auth()->user();
-            $doctor->token()->revoke();
-            $doctor->device_token = NULL;
-            if ($doctor->save()) {
+            $user = auth()->user();
+            $user->token()->revoke();
+            $user->device_token = NULL;
+            if ($user->save()) {
                 return $this->success(new \stdClass(), "Đăng xuất thành công");
             }
         } catch (\Exception $e) {

@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->bigInteger('referral_id', false, true)->nullable();
             $table->boolean('notification')->default(1);
+            $table->string('device_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

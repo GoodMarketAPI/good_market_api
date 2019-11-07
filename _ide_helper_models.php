@@ -24,6 +24,7 @@ namespace App{
  * @property string|null $address
  * @property int|null $referral_id
  * @property int $notification
+ * @property string|null $device_token
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -35,6 +36,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereBirthday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDeviceToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
@@ -239,56 +241,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * Class OauthAccessToken
- *
- * @property string $id
- * @property int $user_id
- * @property int $client_id
- * @property string $name
- * @property string $scopes
- * @property bool $revoked
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $expires_at
- * @package App\Models
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereRevoked($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereScopes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAccessToken whereUserId($value)
- */
-	class OauthAccessToken extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class OauthRefreshToken
- *
- * @property string $id
- * @property string $access_token_id
- * @property bool $revoked
- * @property \Carbon\Carbon $expires_at
- * @package App\Models
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken whereAccessTokenId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthRefreshToken whereRevoked($value)
- */
-	class OauthRefreshToken extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * Class DiscountCode
  *
  * @property int $id
@@ -344,6 +296,7 @@ namespace App\Models{
  * @property string $address
  * @property int $referral_id
  * @property bool $notification
+ * @property string $device_token
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -361,6 +314,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereBirthday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereDeviceToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
@@ -373,58 +327,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUserCode($value)
  */
 	class User extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class OauthClient
- *
- * @property int $id
- * @property int $user_id
- * @property string $name
- * @property string $secret
- * @property string $redirect
- * @property bool $personal_access_client
- * @property bool $password_client
- * @property bool $revoked
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @package App\Models
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient wherePasswordClient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient wherePersonalAccessClient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereRedirect($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereRevoked($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereSecret($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthClient whereUserId($value)
- */
-	class OauthClient extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class OauthPersonalAccessClient
- *
- * @property int $id
- * @property int $client_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @package App\Models
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthPersonalAccessClient whereUpdatedAt($value)
- */
-	class OauthPersonalAccessClient extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -447,30 +349,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Supplier whereUpdatedAt($value)
  */
 	class Supplier extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class OauthAuthCode
- *
- * @property string $id
- * @property int $user_id
- * @property int $client_id
- * @property string $scopes
- * @property bool $revoked
- * @property \Carbon\Carbon $expires_at
- * @package App\Models
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereRevoked($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereScopes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OauthAuthCode whereUserId($value)
- */
-	class OauthAuthCode extends \Eloquent {}
 }
 
 namespace App\Models{
