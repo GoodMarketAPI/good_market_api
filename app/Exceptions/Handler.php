@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +49,27 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'result'  => false,
+                'message' => 'Đường dẫn không tồn tại'
+            ], 404);
+        }
+        if($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'result'  => false,
+                'message' => 'Không tìm thấy dữ liêu'
+            ], 404);
+        }
+
+        if($exception instanceof AuthenticationException) {
+            return response()->json([
+                'result'  => false,
+                'message' => 'Token không hợp lệ',
+                'data'    => [],
+            ], 401);
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -74,6 +74,8 @@ class User extends Authenticatable
 
     protected $appends = ['avatar_url'];
 
+    protected $with = ['referrer'];
+
     public static function boot()
     {
         parent::boot();
@@ -96,7 +98,7 @@ class User extends Authenticatable
         return asset('images/user_default.png');
     }
 
-	public function user()
+	public function referrer()
 	{
 		return $this->belongsTo(\App\Models\User::class, 'referral_id');
 	}
