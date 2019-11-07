@@ -51,7 +51,8 @@ class User extends Authenticatable
 
 	protected $hidden = [
 		'password',
-		'remember_token'
+        'avatar',
+        'remember_token'
 	];
 
 	protected $fillable = [
@@ -67,6 +68,8 @@ class User extends Authenticatable
 		'remember_token'
 	];
 
+    protected $appends = ['avatar_url'];
+
     public static function boot()
     {
         parent::boot();
@@ -75,6 +78,18 @@ class User extends Authenticatable
             $month_user_id    = User::whereMonth('created_at', Carbon::today()->month)->count() + 1;
             $model->user_code = "KH" . Carbon::today()->format('ym') . $insert_id . "C" . $month_user_id;
         });
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if($this->avatar){
+            if(strpos($this->avatar, "https://") !== false){
+                return $this->avatar;
+            }
+            if($this->avatar && \Storage::exists('users/avatars/' . $this->avatar))
+                return asset(\Storage::url('users/avatars/' . $this->avatar));
+        }
+        return asset('images/user_default.png');
     }
 
 	public function user()
