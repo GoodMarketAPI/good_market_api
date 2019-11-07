@@ -25,8 +25,8 @@ class CreateOrdersTable extends Migration
             $table->string('receiver_longitude');
             $table->bigInteger('sub_total');
             $table->bigInteger('total');
-            $table->string('discount_code')->nullable();
-            $table->string('voucher_code')->nullable();
+            $table->string('order_discount_code')->nullable();
+            $table->string('order_voucher_code')->nullable();
             $table->date('delivery_date');
             $table->time('delivery_time');
             $table->text('note')->nullable();
@@ -35,8 +35,8 @@ class CreateOrdersTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_district_id')->references('id')->on('districts')->onDelete('cascade');
-            $table->foreign('discount_code')->references('code')->on('discount_codes')->onDelete('cascade');
-            $table->foreign('voucher_code')->references('code')->on('voucher_codes')->onDelete('cascade');
+            $table->foreign('order_discount_code')->references('code')->on('discount_codes')->onDelete('cascade');
+            $table->foreign('order_voucher_code')->references('code')->on('voucher_codes')->onDelete('cascade');
         });
     }
 

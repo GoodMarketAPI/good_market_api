@@ -22,11 +22,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->date('birthday')->nullable();
             $table->string('address')->nullable();
-            $table->string('referral_phone')->nullable();
-            $table->string('referral_code')->nullable();
+            $table->bigInteger('referral_id', false, true)->nullable();
             $table->boolean('notification')->default(1);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('referral_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
