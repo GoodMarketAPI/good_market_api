@@ -13,7 +13,7 @@ class InfoController extends Controller
 {
     public function listCategories(){
         try {
-            return $this->success(Category::all(), "Danh sách danh mục");
+            return $this->success(Category::whereNull('parent_id')->get(), "Danh sách danh mục");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
