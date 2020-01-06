@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 07 Nov 2019 05:40:35 +0000.
+ * Date: Mon, 06 Jan 2020 15:43:01 +0000.
  */
 
 namespace App\Models;
@@ -13,7 +13,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class Province
  * 
  * @property int $id
- * @property string $province_id
+ * @property string $province
+ * @property string $type
+ * @property float $latitude
+ * @property float $longitude
  * 
  * @property \Illuminate\Database\Eloquent\Collection $districts
  *
@@ -23,8 +26,16 @@ class Province extends Eloquent
 {
 	public $timestamps = false;
 
+	protected $casts = [
+		'latitude' => 'float',
+		'longitude' => 'float'
+	];
+
 	protected $fillable = [
-		'province_id'
+		'province',
+		'type',
+		'latitude',
+		'longitude'
 	];
 
 	public function districts()

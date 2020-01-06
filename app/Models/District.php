@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 07 Nov 2019 05:40:35 +0000.
+ * Date: Mon, 06 Jan 2020 15:43:08 +0000.
  */
 
 namespace App\Models;
@@ -14,6 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property int $province_id
+ * @property string $type
  * @property string $district
  * 
  * @property \App\Models\Province $province
@@ -31,6 +32,7 @@ class District extends Eloquent
 
 	protected $fillable = [
 		'province_id',
+		'type',
 		'district'
 	];
 

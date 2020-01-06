@@ -16,6 +16,7 @@ class CreateDistrictsTable extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('province_id', false, true);
+            $table->string('type');
             $table->string('district');
 
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');

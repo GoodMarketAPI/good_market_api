@@ -25,19 +25,19 @@ class Controller extends BaseController
         return response()->json($response);
     }
 
-    public function error($data, $message, \Exception $e, $code = 500, $options = [])
+    public function error($data, \Exception $e, $options = [])
     {
         $response = [
             'result'  => false,
-            'message' => $message,
             'data'    => $data,
+            'message' => $e->getMessage(),
             'line'    => $e->getLine(),
-            'file'    => $e->getFile(),
+            'file'    => $e->getFile()
         ];
         if(count($options)) {
             $response = array_merge($response, $options);
         }
-        return response()->json($response, $code);
+        return response()->json($response, $e->getCode() && $e->getCode() < 500 ? $e->getCode() : 500);
     }
 
     public function validationError($data = Object_::class, $validators = [])

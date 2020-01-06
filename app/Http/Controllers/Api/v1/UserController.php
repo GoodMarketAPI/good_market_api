@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use phpDocumentor\Reflection\Types\Object_;
 
@@ -16,7 +15,7 @@ class UserController extends Controller
             $user = auth()->user();
             return $this->success($user, "Thông tin người dùng");
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e);
+            return $this->error(new Object_(), $e);
         }
     }
 
@@ -39,7 +38,7 @@ class UserController extends Controller
                 return $this->success($user, "Cập nhật thành công");
             }
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e);
+            return $this->error(new Object_(), $e);
         }
     }
 }

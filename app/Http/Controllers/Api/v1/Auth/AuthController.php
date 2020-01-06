@@ -44,7 +44,7 @@ class AuthController extends Controller
                 return $this->success($user, "Đăng kí thành công");
             }
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e);
+            return $this->error(new Object_(), $e);
         }
     }
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
                 return $this->success($user, "Đăng nhập thành công");
             }
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e, $e->getCode() ? $e->getCode() : 500);
+            return $this->error(new Object_(), $e);
         }
     }
 
@@ -125,7 +125,7 @@ class AuthController extends Controller
 
             return $this->success($user, "Đăng nhập thành công");
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e, $e->getCode() ? $e->getCode() : 500);
+            return $this->error(new Object_(), $e);
         }
     }
 
@@ -142,7 +142,7 @@ class AuthController extends Controller
                 return $this->success(new \stdClass(), "Đăng xuất thành công");
             }
         } catch (\Exception $e) {
-            return $this->error(new Object_(), $e->getMessage(), $e);
+            return $this->error(new Object_(), $e);
         }
     }
 }
