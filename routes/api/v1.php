@@ -5,7 +5,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     // Info
     Route::get('category', 'InfoController@listCategories');
     Route::get('province', 'InfoController@listProvinces');
-    Route::get('ward', 'InfoController@listWards');
     Route::get('voucher-code', 'InfoController@listVoucherCodes');
     Route::get('discount-code', 'InfoController@listDiscountCodes');
 

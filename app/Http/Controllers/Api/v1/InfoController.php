@@ -24,17 +24,8 @@ class InfoController extends Controller
 
     public function listProvinces(){
         try {
-            $provinces = Province::with('districts')->get();
+            $provinces = Province::with('districts.wards')->get();
             return $this->success($provinces, "Danh sách tỉnh thành");
-        } catch (\Exception $e) {
-            return $this->error(new Object_(), $e);
-        }
-    }
-
-    public function listWards(Request $request){
-        try {
-            $district = District::find($request->district_id);
-            return $this->success($district->wards, "Danh sách tỉnh thành");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
