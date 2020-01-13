@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\DiscountCode;
+use App\Models\District;
 use App\Models\Province;
 use App\Models\VoucherCode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use phpDocumentor\Reflection\Types\Object_;
 
 class InfoController extends Controller
@@ -21,7 +24,17 @@ class InfoController extends Controller
 
     public function listProvinces(){
         try {
-            return $this->success(Province::with('districts')->get(), "Danh sách tỉnh thành");
+            $provinces = Province::with('districts')->get();
+            return $this->success($provinces, "Danh sách tỉnh thành");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
+    public function listWards(Request $request){
+        try {
+            $district = District::find($request->district_id);
+            return $this->success($district->wards, "Danh sách tỉnh thành");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }

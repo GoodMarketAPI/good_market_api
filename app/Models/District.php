@@ -45,4 +45,9 @@ class District extends Eloquent
 	{
 		return $this->hasMany(\App\Models\Order::class, 'receiver_district_id');
 	}
+
+    public function wards()
+    {
+        return $this->hasMany(\App\Models\Ward::class);
+    }
 }
