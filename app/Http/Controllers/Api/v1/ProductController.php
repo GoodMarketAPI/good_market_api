@@ -23,6 +23,11 @@ class ProductController extends Controller
             if($request->keyword){
                 $query->where('name', 'LIKE', "%$request->keyword%");
             }
+
+            if($request->category_id){
+                $query->where('category_id', $request->category_id);
+            }
+
             $products = $query->paginate($number_per_page);
 
             return $this->success($products, "Danh sách sản phẩm");
