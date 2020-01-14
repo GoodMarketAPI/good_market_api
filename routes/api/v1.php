@@ -18,6 +18,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
 
     // Product
     Route::resource('product', 'ProductController')->only('index', 'show');
+    Route::resource('supplier', 'SupplierController')->only('index', 'show');
 
     Route::group(['middleware' => 'auth:api'], function () {
         // User
@@ -30,8 +31,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
             Route::post('notification/list', 'UserController@getListNotification');
         });
 
+        // Product
+        Route::resource('product', 'ProductController')->except('index', 'show');
+
         // Supplier
-        Route::resource('supplier', 'SupplierController');
+        Route::resource('supplier', 'SupplierController')->except('index', 'show');
 
         // Order
         Route::resource('order', 'OrderController');
