@@ -35,6 +35,10 @@ class ProductPreprocessing extends Eloquent
 		'fee'
 	];
 
+	protected $hidden = [
+	    'product_id'
+    ];
+
 	public function product()
 	{
 		return $this->belongsTo(\App\Models\Product::class);
