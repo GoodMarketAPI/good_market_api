@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 07 Nov 2019 05:40:35 +0000.
+ * Date: Tue, 14 Jan 2020 14:58:41 +0000.
  */
 
 namespace App\Models;
@@ -14,20 +14,24 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property int $supplier_id
+ * @property int $category_id
  * @property string $name
  * @property int $price
  * @property string $unit
  * @property int $temp_price
  * @property string $temp_unit
- * @property int $promotional_price
- * @property string $promotional_unit
- * @property int $temp_promotional_price
- * @property string $temp_promotional_unit
- * @property int $stock
+ * @property string $temp_weight
+ * @property string $short_description
+ * @property string $preprocessing
  * @property int $fee
+ * @property string $note
+ * @property \Carbon\Carbon $expected_date
+ * @property \Carbon\Carbon $expired_date
+ * @property string $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\Category $category
  * @property \App\Models\Supplier $supplier
  * @property \Illuminate\Database\Eloquent\Collection $order_details
  *
@@ -37,28 +41,39 @@ class Product extends Eloquent
 {
 	protected $casts = [
 		'supplier_id' => 'int',
+		'category_id' => 'int',
 		'price' => 'int',
 		'temp_price' => 'int',
-		'promotional_price' => 'int',
-		'temp_promotional_price' => 'int',
-		'stock' => 'int',
 		'fee' => 'int'
+	];
+
+	protected $dates = [
+		'expected_date',
+		'expired_date'
 	];
 
 	protected $fillable = [
 		'supplier_id',
+		'category_id',
 		'name',
 		'price',
 		'unit',
 		'temp_price',
 		'temp_unit',
-		'promotional_price',
-		'promotional_unit',
-		'temp_promotional_price',
-		'temp_promotional_unit',
-		'stock',
-		'fee'
+		'temp_weight',
+		'short_description',
+		'preprocessing',
+		'fee',
+		'note',
+		'expected_date',
+		'expired_date',
+		'description'
 	];
+
+	public function category()
+	{
+		return $this->belongsTo(\App\Models\Category::class);
+	}
 
 	public function supplier()
 	{
