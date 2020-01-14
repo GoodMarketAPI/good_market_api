@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreprocessingsTables extends Migration
+class CreateProductPreprocessingsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePreprocessingsTables extends Migration
      */
     public function up()
     {
-        Schema::create('preprocessings', function (Blueprint $table) {
+        Schema::create('product_preprocessings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->string('name');
@@ -30,6 +30,6 @@ class CreatePreprocessingsTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preprocessings');
+        Schema::dropIfExists('product_preprocessings');
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 14 Jan 2020 14:58:41 +0000.
+ * Date: Tue, 14 Jan 2020 16:33:21 +0000.
  */
 
 namespace App\Models;
@@ -22,8 +22,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $temp_unit
  * @property string $temp_weight
  * @property string $short_description
- * @property string $preprocessing
- * @property int $fee
  * @property string $note
  * @property \Carbon\Carbon $expected_date
  * @property \Carbon\Carbon $expired_date
@@ -34,6 +32,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \App\Models\Category $category
  * @property \App\Models\Supplier $supplier
  * @property \Illuminate\Database\Eloquent\Collection $order_details
+ * @property \Illuminate\Database\Eloquent\Collection $product_preprocessings
  *
  * @package App\Models
  */
@@ -43,8 +42,7 @@ class Product extends Eloquent
 		'supplier_id' => 'int',
 		'category_id' => 'int',
 		'price' => 'int',
-		'temp_price' => 'int',
-		'fee' => 'int'
+		'temp_price' => 'int'
 	];
 
 	protected $dates = [
@@ -62,13 +60,15 @@ class Product extends Eloquent
 		'temp_unit',
 		'temp_weight',
 		'short_description',
-		'preprocessing',
-		'fee',
 		'note',
 		'expected_date',
 		'expired_date',
 		'description'
 	];
+
+	protected $with = [
+	    'product_preprocessings'
+    ];
 
 	public function category()
 	{
@@ -83,5 +83,10 @@ class Product extends Eloquent
 	public function order_details()
 	{
 		return $this->hasMany(\App\Models\OrderDetail::class);
+	}
+
+	public function product_preprocessings()
+	{
+		return $this->hasMany(\App\Models\ProductPreprocessing::class);
 	}
 }
