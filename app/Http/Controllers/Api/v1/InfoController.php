@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\DiscountCode;
@@ -14,6 +15,23 @@ use phpDocumentor\Reflection\Types\Object_;
 
 class InfoController extends Controller
 {
+    public function company(){
+        try {
+            $data = json_decode(file_get_contents(public_path('data/company.json')));
+            return $this->success($data, "Thông tin công ty");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
+    public function listBanners(){
+        try {
+            return $this->success(Banner::all(), "Danh sách banner");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
     public function listCategories(){
         try {
             return $this->success(Category::whereNull('parent_id')->get(), "Danh sách danh mục");

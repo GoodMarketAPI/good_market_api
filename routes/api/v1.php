@@ -3,6 +3,8 @@
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     // Info
+    Route::get('company', 'InfoController@company');
+    Route::get('banner', 'InfoController@listBanners');
     Route::get('category', 'InfoController@listCategories');
     Route::get('province', 'InfoController@listProvinces');
     Route::get('voucher-code', 'InfoController@listVoucherCodes');
