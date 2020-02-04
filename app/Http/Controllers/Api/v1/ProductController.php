@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\Product;
+use App\Models\SaleProduct;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use phpDocumentor\Reflection\Types\Object_;
@@ -31,6 +33,20 @@ class ProductController extends Controller
             $products = $query->paginate($number_per_page);
 
             return $this->success($products, "Danh sách sản phẩm");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
+    public function getTodaySale(Request $request){
+        try {
+            $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
+
+            $products = SaleProduct::where('start', '<=', Carbon::today())
+                ->where('end', '>=', Carbon::today())
+                ->paginate($number_per_page);
+
+            return $this->success($products, "Danh sách sản phẩm giảm giá hôm nay");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }

@@ -19,7 +19,13 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     });
 
     // Product
-    Route::resource('product', 'ProductController')->only('index', 'show');
+    Route::resource('product', 'ProductController')->only('index');
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('{id}', 'ProductController@show')->where('id', '[0-9]+');
+        Route::get('today', 'ProductController@getTodaySale');
+    });
+
+    // Supplier
     Route::resource('supplier', 'SupplierController')->only('index', 'show');
 
     Route::group(['middleware' => 'auth:api'], function () {

@@ -89,4 +89,9 @@ class Product extends Eloquent
 	{
 		return $this->hasMany(\App\Models\ProductPreprocessing::class);
 	}
+
+    public function sale_products()
+    {
+        return $this->hasMany(\App\Models\SaleProduct::class);
+    }
 }
