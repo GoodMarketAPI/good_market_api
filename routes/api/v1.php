@@ -22,7 +22,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::resource('product', 'ProductController')->only('index');
     Route::group(['prefix' => 'product'], function () {
         Route::get('{id}', 'ProductController@show')->where('id', '[0-9]+');
-        Route::get('today', 'ProductController@getTodaySale');
+        Route::get('sale-today', 'ProductController@getTodaySale');
+        Route::get('best-selling', 'ProductController@getBestSelling');
     });
 
     // Supplier

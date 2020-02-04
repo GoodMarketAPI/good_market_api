@@ -52,6 +52,20 @@ class ProductController extends Controller
         }
     }
 
+    public function getBestSelling(Request $request){
+        try {
+            $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
+
+            $products = Product::withCount('order_details')
+                ->orderByDesc('order_details_count')
+                ->paginate($number_per_page);
+
+            return $this->success($products, "Danh sách sản phẩm bán chạy");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
