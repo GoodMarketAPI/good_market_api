@@ -1,42 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.4.15.7
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jan 13, 2020 at 04:08 PM
--- Server version: 5.6.37
--- PHP Version: 7.1.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `good_market`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wards`
---
-
-CREATE TABLE IF NOT EXISTS `wards` (
-  `id` bigint(20) unsigned NOT NULL,
-  `ward` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `district_id` bigint(20) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `wards`
---
-
 INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (1, 'Phường Cống Vị', 'Phường', 1),
 (2, 'Phường Điện Biên', 'Phường', 1),
@@ -1564,8 +1525,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (1524, 'Xã Nghĩa An', 'Xã', 133),
 (1525, 'Xã Nghĩa Lợi', 'Xã', 133),
 (1526, 'Xã Nghĩa Phúc', 'Xã', 133),
-(1527, 'Thị trấn Yên Thế', 'Thị trấn', 135);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(1527, 'Thị trấn Yên Thế', 'Thị trấn', 135),
 (1528, 'Xã An Lạc', 'Xã', 135),
 (1529, 'Xã An Phú', 'Xã', 135),
 (1530, 'Xã Động Quan', 'Xã', 135),
@@ -3047,8 +3007,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (3006, 'Phường Xuân Hoà', 'Phường', 244),
 (3007, 'Xã Cao Minh', 'Xã', 244),
 (3008, 'Xã Nam Viêm', 'Xã', 244),
-(3009, 'Xã Ngọc Thanh', 'Xã', 244);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(3009, 'Xã Ngọc Thanh', 'Xã', 244),
 (3010, 'Xã Tiền Châu', 'Xã', 244),
 (3011, 'Thị trấn Hoa Sơn', 'Thị trấn', 246),
 (3012, 'Thị trấn Lập Thạch', 'Thị trấn', 246),
@@ -4520,8 +4479,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (4478, 'Xã Hồng Tiến', 'Xã', 343),
 (4479, 'Xã Lê Lợi', 'Xã', 343),
 (4480, 'Xã Minh Hưng', 'Xã', 343),
-(4481, 'Xã Minh Tân', 'Xã', 343);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(4481, 'Xã Minh Tân', 'Xã', 343),
 (4482, 'Xã Nam Bình', 'Xã', 343),
 (4483, 'Xã Nam Cao', 'Xã', 343),
 (4484, 'Xã Quang Bình', 'Xã', 343),
@@ -6003,8 +5961,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (5960, 'Xã Mã Thành', 'Xã', 426),
 (5961, 'Xã Minh Thành', 'Xã', 426),
 (5962, 'Xã Mỹ Thành', 'Xã', 426),
-(5963, 'Xã Nam Thành', 'Xã', 426);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(5963, 'Xã Nam Thành', 'Xã', 426),
 (5964, 'Xã Nhân Thành', 'Xã', 426),
 (5965, 'Xã Phú Thành', 'Xã', 426),
 (5966, 'Xã Phúc Thành', 'Xã', 426),
@@ -7470,8 +7427,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (7426, 'Xã Vĩnh Sơn', 'Xã', 546),
 (7427, 'Xã Vĩnh Thịnh', 'Xã', 546),
 (7428, 'Xã Vĩnh Thuận', 'Xã', 546),
-(7429, 'Thị trấn Phú Phong', 'Thị trấn', 547);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(7429, 'Thị trấn Phú Phong', 'Thị trấn', 547),
 (7430, 'Xã Bình Hòa', 'Xã', 547),
 (7431, 'Xã Bình Nghi', 'Xã', 547),
 (7432, 'Xã Bình Tân', 'Xã', 547),
@@ -8946,8 +8902,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (8901, 'Xã Minh Hoà', 'Xã', 720),
 (8902, 'Xã Minh Tân', 'Xã', 720),
 (8903, 'Xã Minh Thạnh', 'Xã', 720),
-(8904, 'Xã Thanh An', 'Xã', 720);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(8904, 'Xã Thanh An', 'Xã', 720),
 (8905, 'Xã Thanh Tuyền', 'Xã', 720),
 (8906, 'Phường Chánh Phú Hòa', 'Phường', 721),
 (8907, 'Phường Hòa Lợi', 'Phường', 721),
@@ -10375,8 +10330,7 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (10329, 'Xã Thường Phước 1', 'Xã', 870),
 (10330, 'Xã Thường Phước 2', 'Xã', 870),
 (10331, 'Xã Thường Thới Hậu A', 'Xã', 870),
-(10332, 'Xã Thường Thới Hậu B', 'Xã', 870);
-INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
+(10332, 'Xã Thường Thới Hậu B', 'Xã', 870),
 (10333, 'Xã Thường Thới Tiền', 'Xã', 870),
 (10334, 'Thị trấn Tràm Chim', 'Thị trấn', 871),
 (10335, 'Xã An Hòa', 'Xã', 871),
@@ -11207,37 +11161,3 @@ INSERT INTO `wards` (`id`, `ward`, `type`, `district_id`) VALUES
 (11160, 'Xã Tân Ân Tây', 'Xã', 973),
 (11161, 'Xã Viên An', 'Xã', 973),
 (11162, 'Xã Viên An Đông', 'Xã', 973);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `wards`
---
-ALTER TABLE `wards`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `wards_district_id_foreign` (`district_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `wards`
---
-ALTER TABLE `wards`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11163;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `wards`
---
-ALTER TABLE `wards`
-  ADD CONSTRAINT `wards_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

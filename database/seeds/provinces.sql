@@ -1,45 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Máy chủ: localhost
--- Thời gian đã tạo: Th12 08, 2019 lúc 08:54 PM
--- Phiên bản máy phục vụ: 5.6.29
--- Phiên bản PHP: 7.2.15
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Cơ sở dữ liệu: `vexe_dev`
---
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `provinces`
---
-
-CREATE TABLE `provinces` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `latitude` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `longitude` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `provinces`
---
-
 INSERT INTO `provinces` (`id`, `province`, `type`, `latitude`, `longitude`) VALUES
 (1, 'An Giang', 'Tỉnh', '10.7', '105.11667'),
 (2, 'Bà Rịa - Vũng Tàu', 'Tỉnh', '10.49629', '107.16841'),
@@ -104,28 +62,3 @@ INSERT INTO `provinces` (`id`, `province`, `type`, `latitude`, `longitude`) VALU
 (61, 'Vĩnh Long', 'Tỉnh', '10.25369', '105.9722'),
 (62, 'Vĩnh Phúc', 'Tỉnh', '21.30891', '105.60489'),
 (63, 'Yên Bái', 'Tỉnh', '21.72288', '104.9113');
-
---
--- Chỉ mục cho các bảng đã đổ
---
-
---
--- Chỉ mục cho bảng `provinces`
---
-ALTER TABLE `provinces`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng `provinces`
---
-ALTER TABLE `provinces`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
