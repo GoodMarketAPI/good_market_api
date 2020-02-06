@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 06 Feb 2020 17:31:44 +0000.
+ * Date: Thu, 06 Feb 2020 18:00:55 +0000.
  */
 
 namespace App\Models;
@@ -18,8 +18,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $product_preprocessing_id
  * @property int $quantity
  * @property int $price
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Order $order
  * @property \App\Models\Product $product
@@ -29,6 +27,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class OrderDetail extends Eloquent
 {
+	public $timestamps = false;
+
 	protected $casts = [
 		'order_id' => 'int',
 		'product_id' => 'int',

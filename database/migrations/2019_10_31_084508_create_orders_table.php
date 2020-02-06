@@ -29,8 +29,8 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('discount')->nullable();
             $table->string('order_discount_code')->nullable();
             $table->string('order_voucher_code')->nullable();
-            $table->date('delivery_date');
-            $table->time('delivery_time');
+            $table->date('delivery_date')->nullable();
+            $table->time('delivery_time')->nullable();
             $table->text('note')->nullable();
             $table->tinyInteger('status')->default(1)->comment('0: cancelled, 1: received, 2: shopping, 3: delivering, 4: undelivered, 5: delivered');
             $table->timestamps();

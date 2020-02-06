@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 07 Nov 2019 05:40:35 +0000.
+ * Date: Thu, 06 Feb 2020 17:59:49 +0000.
  */
 
 namespace App\Models;
@@ -23,6 +23,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $receiver_longitude
  * @property int $sub_total
  * @property int $total
+ * @property int $fee
+ * @property int $discount
  * @property string $order_discount_code
  * @property string $order_voucher_code
  * @property \Carbon\Carbon $delivery_date
@@ -36,6 +38,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \App\Models\VoucherCode $voucher_code
  * @property \App\Models\District $district
  * @property \App\Models\User $user
+ * @property \Illuminate\Database\Eloquent\Collection $order_details
  *
  * @package App\Models
  */
@@ -46,6 +49,8 @@ class Order extends Eloquent
 		'receiver_district_id' => 'int',
 		'sub_total' => 'int',
 		'total' => 'int',
+		'fee' => 'int',
+		'discount' => 'int',
 		'status' => 'int'
 	];
 
@@ -65,6 +70,8 @@ class Order extends Eloquent
 		'receiver_longitude',
 		'sub_total',
 		'total',
+		'fee',
+		'discount',
 		'order_discount_code',
 		'order_voucher_code',
 		'delivery_date',
@@ -72,6 +79,14 @@ class Order extends Eloquent
 		'note',
 		'status'
 	];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($order) {
+            $order->order_code = "ĐH" . (self::max('id') + 1);
+        });
+    }
 
 	public function discount_code()
 	{
@@ -91,5 +106,10 @@ class Order extends Eloquent
 	public function user()
 	{
 		return $this->belongsTo(\App\Models\User::class);
+	}
+
+	public function order_details()
+	{
+		return $this->hasMany(\App\Models\OrderDetail::class);
 	}
 }

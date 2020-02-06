@@ -37,7 +37,7 @@ class Controller extends BaseController
         if(count($options)) {
             $response = array_merge($response, $options);
         }
-        return response()->json($response, $e->getCode() && $e->getCode() < 500 ? $e->getCode() : 500);
+        return response()->json($response, $e->getCode() && is_numeric($e->getCode()) && $e->getCode() < 500 ? $e->getCode() : 500);
     }
 
     public function validationError($data = Object_::class, $validators = [])
