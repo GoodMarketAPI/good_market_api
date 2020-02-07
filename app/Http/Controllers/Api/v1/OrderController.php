@@ -64,17 +64,14 @@ class OrderController extends Controller
                 OrderDetail::create([
                     'order_id'   => $order->id,
                     'product_id' => $product->id,
-                    'product_preprocessing_id' => $product->product_preprocessing_id ? $product->product_preprocessing_id : NULL,
                     'quantity'   => $product->quantity,
                     'price'      => $product->price,
                 ]);
-                $sub_total += $product->price;
+                $sub_total += $product->quantity * $product->price;
             }
 
-            $total = $sub_total;
-
             $order->sub_total = $sub_total;
-            $order->total     = $total;
+            $order->total     = $sub_total;
 
             if ($order->save()) {
                 \DB::commit();
