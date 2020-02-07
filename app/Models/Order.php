@@ -7,11 +7,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Order
- * 
+ *
  * @property int $id
  * @property int $user_id
  * @property string $order_code
@@ -33,7 +34,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\DiscountCode $discount_code
  * @property \App\Models\VoucherCode $voucher_code
  * @property \App\Models\District $district
@@ -44,72 +45,75 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Order extends Eloquent
 {
-	protected $casts = [
-		'user_id' => 'int',
-		'receiver_district_id' => 'int',
-		'sub_total' => 'int',
-		'total' => 'int',
-		'fee' => 'int',
-		'discount' => 'int',
-		'status' => 'int'
-	];
+    protected $casts = [
+        'user_id'              => 'int',
+        'receiver_district_id' => 'int',
+        'sub_total'            => 'int',
+        'total'                => 'int',
+        'fee'                  => 'int',
+        'discount'             => 'int',
+        'status'               => 'int'
+    ];
 
-	protected $dates = [
-		'delivery_date',
-		'delivery_time'
-	];
+    protected $dates = [
+        'delivery_date',
+        'delivery_time'
+    ];
 
-	protected $fillable = [
-		'user_id',
-		'order_code',
-		'receiver_name',
-		'receiver_phone',
-		'receiver_address',
-		'receiver_district_id',
-		'receiver_latitude',
-		'receiver_longitude',
-		'sub_total',
-		'total',
-		'fee',
-		'discount',
-		'order_discount_code',
-		'order_voucher_code',
-		'delivery_date',
-		'delivery_time',
-		'note',
-		'status'
-	];
+    protected $fillable = [
+        'user_id',
+        'order_code',
+        'receiver_name',
+        'receiver_phone',
+        'receiver_address',
+        'receiver_district_id',
+        'receiver_latitude',
+        'receiver_longitude',
+        'sub_total',
+        'total',
+        'fee',
+        'discount',
+        'order_discount_code',
+        'order_voucher_code',
+        'delivery_date',
+        'delivery_time',
+        'note',
+        'status'
+    ];
 
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($order) {
-            $order->order_code = "ĐH" . (self::max('id') + 1);
+            $time              = Carbon::today()->format('ymd');
+            $insert_id         = self::max('id') + 1;
+            $day_user_number   = self::whereDay('created_at', Carbon::today()->day)->count() + 1;
+            $order->order_code = "B" . $time . $insert_id . "B" . $day_user_number;
         });
     }
 
-	public function discount_code()
-	{
-		return $this->belongsTo(\App\Models\DiscountCode::class, 'order_discount_code', 'code');
-	}
+    public function discount_code()
+    {
+        return $this->belongsTo(\App\Models\DiscountCode::class, 'order_discount_code', 'code');
+    }
 
-	public function voucher_code()
-	{
-		return $this->belongsTo(\App\Models\VoucherCode::class, 'order_voucher_code', 'code');
-	}
+    public function voucher_code()
+    {
+        return $this->belongsTo(\App\Models\VoucherCode::class, 'order_voucher_code', 'code');
+    }
 
-	public function district()
-	{
-		return $this->belongsTo(\App\Models\District::class, 'receiver_district_id');
-	}
+    public function district()
+    {
+        return $this->belongsTo(\App\Models\District::class, 'receiver_district_id');
+    }
 
-	public function user()
-	{
-		return $this->belongsTo(\App\Models\User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 
-	public function order_details()
-	{
-		return $this->hasMany(\App\Models\OrderDetail::class);
-	}
+    public function order_details()
+    {
+        return $this->hasMany(\App\Models\OrderDetail::class);
+    }
 }

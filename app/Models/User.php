@@ -80,9 +80,10 @@ class User extends Authenticatable
     {
         parent::boot();
         self::creating(function ($model) {
-            $insert_id        = DB::select("SHOW TABLE STATUS LIKE 'users'")[0]->Auto_increment;
-            $month_user_id    = User::whereMonth('created_at', Carbon::today()->month)->count() + 1;
-            $model->user_code = "KH" . Carbon::today()->format('ym') . $insert_id . "C" . $month_user_id;
+            $time = Carbon::today()->format('ym');
+            $insert_id = self::max('id') + 1;
+            $month_user_number    = self::whereMonth('created_at', Carbon::today()->month)->count() + 1;
+            $model->user_code = "KH" . $time . $insert_id . "C" . $month_user_number;
         });
     }
 
