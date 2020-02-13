@@ -22,12 +22,20 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::resource('product', 'ProductController')->only('index');
     Route::group(['prefix' => 'product'], function () {
         Route::get('{id}', 'ProductController@show')->where('id', '[0-9]+');
-        Route::get('sale-today', 'ProductController@getTodaySale');
+        Route::get('sale', 'ProductController@getSale');
         Route::get('best-selling', 'ProductController@getBestSelling');
+        Route::get('hot-today', 'ProductController@getHotToday');
     });
 
     // Supplier
-    Route::resource('supplier', 'SupplierController')->only('index', 'show');
+    Route::resource('supplier', 'SupplierController')->only('index');
+    Route::group(['prefix' => 'supplier'], function () {
+        Route::get('{id}', 'SupplierController@show')->where('id', '[0-9]+');
+        Route::resource('sale', 'SaleController')->only('index');
+        Route::group(['prefix' => 'sale'], function () {
+            Route::get('{id}', 'SaleController@show')->where('id', '[0-9]+');
+        });
+    });
 
     Route::group(['middleware' => 'auth:api'], function () {
         // User

@@ -16,17 +16,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         try {
             $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
 
             $query = Product::query();
 
-            if($request->keyword){
+            if ($request->keyword) {
                 $query->where('name', 'LIKE', "%$request->keyword%");
             }
 
-            if($request->category_id){
+            if ($request->category_id) {
                 $query->where('category_id', $request->category_id);
             }
 
@@ -38,21 +39,29 @@ class ProductController extends Controller
         }
     }
 
-    public function getTodaySale(Request $request){
+    public function getSale(Request $request)
+    {
         try {
             $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
 
-            $products = SaleProduct::where('start', '<=', Carbon::today())
-                ->where('end', '>=', Carbon::today())
+            $products = Product::whereHas('sale_products', function ($q) {
+                $q->where('start', '<=', Carbon::today())
+                    ->where('end', '>=', Carbon::today());
+            })
+                ->with('sale_products')
                 ->paginate($number_per_page);
+            foreach ($products as $product){
+                $product->sale_products->makeHidden('product');
+            }
 
-            return $this->success($products, "Danh sách sản phẩm giảm giá hôm nay");
+            return $this->success($products, "Danh sách sản phẩm khuyến mại");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
     }
 
-    public function getBestSelling(Request $request){
+    public function getBestSelling(Request $request)
+    {
         try {
             $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
 
@@ -66,10 +75,31 @@ class ProductController extends Controller
         }
     }
 
+    public function getHotToday(Request $request)
+    {
+        try {
+            $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
+
+            $products = Product::whereHas('sale_products', function ($q) {
+                $q->where('start', '<=', Carbon::today())
+                    ->where('end', '>=', Carbon::today());
+            })
+                ->with('sale_products')
+                ->paginate($number_per_page);
+            foreach ($products as $product){
+                $product->sale_products->makeHidden('product');
+            }
+
+            return $this->success($products, "Danh sách sản phẩm hot hôm nay");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -80,7 +110,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -91,8 +121,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -103,7 +133,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

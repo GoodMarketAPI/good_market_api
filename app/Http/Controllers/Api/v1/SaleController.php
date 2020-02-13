@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\Sale;
 use App\Models\Supplier;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use phpDocumentor\Reflection\Types\Object_;
 
-class SupplierController extends Controller
+class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,15 +19,15 @@ class SupplierController extends Controller
     {
         try {
             $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
-            $query = Supplier::query();
-            if($request->has_sale){
-                $query->whereHas('sales', function($q){
-                    $q->where('start', '<=', Carbon::today())
-                        ->where('end', '>=', Carbon::today());
-                });
+
+            $supplier = Supplier::find($request->supplier_id);
+            if (!$supplier) {
+                throw new \Exception('Dữ liệu không tồn tại');
             }
-            $suppliers = $query->paginate($number_per_page);
-            return $this->success($suppliers, "Danh sách đối tác");
+            $sales = Sale::where('supplier_id', $supplier->id)
+                ->paginate($number_per_page);
+
+            return $this->success($sales, "Danh sách chương trình khuyến mại");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
@@ -36,7 +36,7 @@ class SupplierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,17 +47,17 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         try {
-            $supplier = Supplier::find($id);
-            if (!$supplier) {
-                throw new \Exception('Dữ liệu không tồn tại', 200);
+            $sale = Sale::find($id);
+            if (!$sale) {
+                throw new \Exception('Dữ liệu không tồn tại');
             }
-            return $this->success($supplier, "Chi tiết đối tác");
+            return $this->success($sale, "Chi tiết chương trình khuyến mại");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
@@ -66,8 +66,8 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,7 +78,7 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -36,4 +36,9 @@ class Supplier extends Eloquent
 	{
 		return $this->hasMany(\App\Models\Product::class);
 	}
+
+    public function sales()
+    {
+        return $this->hasMany(\App\Models\Sale::class);
+    }
 }

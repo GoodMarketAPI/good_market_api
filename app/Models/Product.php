@@ -42,7 +42,8 @@ class Product extends Eloquent
 		'supplier_id' => 'int',
 		'category_id' => 'int',
 		'price' => 'int',
-		'temp_price' => 'int'
+		'temp_price' => 'int',
+        'order_details_count' => 'int'
 	];
 
 	protected $dates = [
