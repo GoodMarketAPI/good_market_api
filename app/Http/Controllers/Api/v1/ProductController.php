@@ -17,26 +17,26 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        try {
-            $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
+    {try {
+        $number_per_page = $request->number_per_page ? $request->number_per_page : 10;
 
-            $query = Product::query();
+        $query = Product::query();
 
-            if ($request->keyword) {
-                $query->where('name', 'LIKE', "%$request->keyword%");
-            }
-
-            if ($request->category_id) {
-                $query->where('category_id', $request->category_id);
-            }
-
-            $products = $query->paginate($number_per_page);
-
-            return $this->success($products, "Danh sách sản phẩm");
-        } catch (\Exception $e) {
-            return $this->error(new Object_(), $e);
+        if ($request->keyword) {
+            $query->where('name', 'LIKE', "%$request->keyword%");
         }
+
+        if ($request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $products = $query->paginate($number_per_page);
+
+        return $this->success($products, "Danh sách sản phẩm");
+    } catch (\Exception $e) {
+        return $this->error(new Object_(), $e);
+    }
+
     }
 
     public function getSale(Request $request)
