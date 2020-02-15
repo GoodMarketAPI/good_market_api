@@ -9,6 +9,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::get('province', 'InfoController@listProvinces');
     Route::get('voucher-code', 'InfoController@listVoucherCodes');
     Route::get('discount-code', 'InfoController@listDiscountCodes');
+    Route::get('section', 'InfoController@getSection');
 
     // User
     Route::group(['prefix' => 'user'], function () {

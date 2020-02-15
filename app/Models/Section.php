@@ -32,4 +32,9 @@ class Section extends Eloquent
 		'description',
 		'order'
 	];
+
+	protected $hidden = [
+	    'created_at',
+        'updated_at'
+    ];
 }

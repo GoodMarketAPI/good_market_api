@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DiscountCode;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\Section;
 use App\Models\VoucherCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -60,6 +61,14 @@ class InfoController extends Controller
     public function listDiscountCodes(){
         try {
             return $this->success(DiscountCode::all(), "Danh sách mã giảm giá");
+        } catch (\Exception $e) {
+            return $this->error(new Object_(), $e);
+        }
+    }
+
+    public function getSection(){
+        try {
+            return $this->success(Section::orderBy('order')->get(), "Bố cục");
         } catch (\Exception $e) {
             return $this->error(new Object_(), $e);
         }
