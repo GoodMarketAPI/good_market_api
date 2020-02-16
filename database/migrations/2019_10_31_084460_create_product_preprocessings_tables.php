@@ -17,7 +17,8 @@ class CreateProductPreprocessingsTables extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->string('name');
-            $table->string('fee')->nullable();
+            $table->integer('fee')->nullable();
+            $table->string('unit')->nullable();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
