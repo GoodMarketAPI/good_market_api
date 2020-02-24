@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Good Market Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -21,10 +21,14 @@
 </head>
 <body>
 <div id="wrapper">
-
     @include('master.left_menu')
-
-    @yield('content')
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @include('master.header')
+            @yield('content')
+        </div>
+    </div>
 </div>
 
     <!-- Scroll to Top Button-->
@@ -52,8 +56,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
