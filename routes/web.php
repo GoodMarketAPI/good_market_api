@@ -13,9 +13,11 @@
 
 //Route::get('/', function () {
 //    return view('welcome');
-//});\
+//});
 Route::group(['namespace' => 'Admin'], function () {
     Route::get('/login', 'LoginController@login');
+    Route::get('/register', 'RegisterController@register');
+    Route::get('/forgot_password', 'ForgotPasswordController@forgot_password');
 });
 
 //Auth::routes();

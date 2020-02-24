@@ -1,0 +1,11 @@
+.ct-bg-login-image {
+    background: url("/images/banners/banner-1.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.ct-bg-register-image {
+    background: url("/images/banners/banner-4.jpg");
+    background-position: center;
+    background-size: cover;
+}
