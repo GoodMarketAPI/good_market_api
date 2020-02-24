@@ -18,13 +18,13 @@ class LocationSeeder extends Seeder
         DB::table('wards')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $province_sql = file_get_contents(database_path() . '/seeds/provinces.sqls');
+        $province_sql = file_get_contents(database_path() . '/seeds/provinces.sql');
         DB::statement($province_sql);
 
-        $district_sql = file_get_contents(database_path() . '/seeds/districts.sqls');
+        $district_sql = file_get_contents(database_path() . '/seeds/districts.sql');
         DB::statement($district_sql);
 
-        $ward_sql = file_get_contents(database_path() . '/seeds/wards.sqls');
+        $ward_sql = file_get_contents(database_path() . '/seeds/wards.sql');
         DB::statement($ward_sql);
     }
 }

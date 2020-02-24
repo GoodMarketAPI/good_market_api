@@ -13,6 +13,9 @@
 
 //Route::get('/', function () {
 //    return view('welcome');
-//});
+//});\
+Route::group(['namespace' => 'Admin'], function () {
+    Route::get('/login', 'LoginController@login');
+});
 
-Auth::routes();
+//Auth::routes();
